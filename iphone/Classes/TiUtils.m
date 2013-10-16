@@ -505,6 +505,29 @@ bool Base64AllocAndEncodeData(const void *inInputData, size_t inInputDataSize, c
     color: 'red'
  }
  */
++(NSMutableParagraphStyle *)paragraphStyleValue:(id)value
+{
+    if(![value isKindOfClass:[NSDictionary class]]) return nil;
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    id lineSpacing=[value objectForKey:@"lineSpacing"];
+    if(lineSpacing!=nil)
+        paragraphStyle.lineSpacing = [TiUtils floatValue:lineSpacing];
+    id minimumLineHeight=[value objectForKey:@"minimumLineHeight"];
+    if(minimumLineHeight!=nil)
+        paragraphStyle.minimumLineHeight=[TiUtils floatValue:minimumLineHeight];
+    id maximumLineHeight=[value objectForKey:@"maximumLineHeight"];
+    if(maximumLineHeight!=nil)
+        paragraphStyle.maximumLineHeight=[TiUtils floatValue:maximumLineHeight];
+    id truncateWithEllipsis=[value objectForKey:@"truncateWithEllipsis"];
+    if(truncateWithEllipsis!=nil)
+    {
+        BOOL ellipsisTrue=[TiUtils boolValue:truncateWithEllipsis];
+        if(ellipsisTrue)
+            paragraphStyle.lineBreakMode=NSLineBreakByTruncatingTail;
+    }
+
+    return [paragraphStyle autorelease];
+}
 +(NSShadow*)shadowValue:(id)value
 {
     if(![value isKindOfClass:[NSDictionary class]]) return nil;

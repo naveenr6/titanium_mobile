@@ -71,8 +71,9 @@
             break;
             
         case AttributeNameParagraphStyle:
+           // implemented for niiu, not present in current titanium sdk;		
             attrName = NSParagraphStyleAttributeName;
-            errorMessage = @"ATTRIBUTE_PARAGRAPH_STYLE not yet supported";
+            attrValue=[TiUtils paragraphStyleValue:value];
             break;
             
         case AttributeNameForegroundColor:
